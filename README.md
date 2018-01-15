@@ -34,10 +34,11 @@ serial_data = {
         seconds_between_poll: 5
     }
 }
-```
 
 reactor = Tinny::Reactor.new
 reactor.async.process(serial_data)
+
+```
 
 
 ## Development
