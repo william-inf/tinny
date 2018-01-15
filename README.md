@@ -1,8 +1,8 @@
 # Tinny
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tinny`. To experiment with that code, run `bin/console` for an interactive prompt.
+Tinny is a simple connection manager which makes it easier to configure, setup and asynchronously stream data from multiple serial/CANBUS connections.
 
-TODO: Delete this and the text above, and describe your gem
+It has a dead simple data handler class to implement in order to allow custom data handling on streamed data!
 
 ## Installation
 
@@ -22,7 +22,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+serial_data = {
+    connection: 'serial_port_connection',
+    config: {
+        mount_point: '/dev/ttyACM5',
+        baud_rate: 9600,
+        data_bits: 8,
+        stop_bits: 1,
+        data_handler: Tinny::DataHandler::TemperatureHandler.new, # Example data handler
+        seconds_between_poll: 5
+    }
+}
+```
+
+reactor = Tinny::Reactor.new
+reactor.async.process(serial_data)
+
 
 ## Development
 
@@ -32,7 +48,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/tinny. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/william-inf/tinny. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -40,4 +56,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Tinny project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/tinny/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Tinny project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/william-inf/tinny/blob/master/CODE_OF_CONDUCT.md).
