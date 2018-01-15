@@ -4,11 +4,9 @@ require 'tinny/logger_helpers'
 require 'logger'
 
 module Tinny
-
   class << self
     attr_accessor :configuration, :logger
   end
-
 
   def self.configuration
     @configuration ||= Configuration.new
@@ -27,5 +25,4 @@ module Tinny
       log.progname = self.name
     end
   end
-
 end

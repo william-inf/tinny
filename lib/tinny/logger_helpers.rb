@@ -1,7 +1,7 @@
 require 'tinny'
 
+# Helper methods for logging
 module LoggerHelpers
-
   def log_debug(message)
     Tinny.logger.debug message
   end
@@ -21,5 +21,4 @@ module LoggerHelpers
   def log_fatal(message)
     Tinny.logger.fatal message
   end
-
 end

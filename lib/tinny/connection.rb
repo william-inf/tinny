@@ -13,21 +13,21 @@ module Tinny
       @config = {}
     end
 
-    def is_configured?
+    def configured?
       @configured
     end
 
     def configure(**kwargs)
       @config = kwargs
       required_config.each do |val|
-        raise "Missing config - #{val}" unless @config.has_key? val
+        raise "Missing config - #{val}" unless @config.key? val
       end
 
       @configured = true
     end
 
     def stream_data
-      raise 'Run configure first to set up this connection' unless is_configured?
+      raise 'Run configure first to set this up' unless configured?
       log_info 'Beginning data stream ...'
       stream_data_impl
     end

@@ -4,6 +4,10 @@ Tinny is a simple connection manager which makes it easier to configure, setup a
 
 It has a dead simple data handler class to implement in order to allow custom data handling on streamed data!
 
+----
+
+Tinny is currently under active development and may be unstable and not production ready.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -37,7 +41,6 @@ serial_data = {
 
 reactor = Tinny::Reactor.new
 reactor.async.process(serial_data)
-
 ```
 
 

@@ -51,7 +51,7 @@ module Tinny
   end
 end
 
-## Example Code
+# # Example Code
 # serial_data = {
 #     connection: 'serial_port_connection',
 #     config: {

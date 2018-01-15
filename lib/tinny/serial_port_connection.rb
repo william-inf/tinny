@@ -7,23 +7,30 @@ require 'tinny/exceptions/invalid_handler_exception'
 
 module Tinny
   class SerialPortConnection < Tinny::Connection
-
     def initialize
       super(:serial_port_connection)
     end
 
     def stream_data_impl
       data_handler = @config[:data_handler]
-      if data_handler.nil? || data_handler.class.superclass.name == Tinny::DataHandler::Handler
+      if data_handler.nil? ||
+          data_handler.class.superclass.name == Tinny::DataHandler::Handler
         raise Tinny::Exception::InvalidHandlerException.new
       end
 
-      @sp = SerialPort.new(@config[:mount_point], @config[:baud_rate], @config[:data_bits], @config[:stop_bits], SerialPort::NONE)
-      @timer.every(@config[:seconds_between_poll]) {
+      @sp = SerialPort.new(
+          @config[:mount_point],
+          @config[:baud_rate],
+          @config[:data_bits],
+          @config[:stop_bits],
+          SerialPort::NONE
+
+      )
+      @timer.every(@config[:seconds_between_poll]) do
         value = @sp.readlines
         @sp.flush
         data_handler.handle(value)
-      }
+      end
 
       loop { @timer.wait }
     end
@@ -38,9 +45,7 @@ module Tinny
        :data_bits,
        :stop_bits,
        :data_handler,
-       :seconds_between_poll
-      ]
+       :seconds_between_poll]
     end
-
   end
 end
