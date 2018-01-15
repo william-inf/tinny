@@ -1,8 +1,9 @@
 require 'tinny/logger_helpers'
+require 'tinny/data_handlers/handler'
 
 module Tinny
   module DataHandler
-    class CanFrameHandler
+    class CanFrameHandler < Tinny::DataHandler::Handler
       include LoggerHelpers
 
       attr_reader :kind, :identifier, :length, :raw_data

@@ -9,6 +9,7 @@ module Tinny
     attr_accessor :configuration, :logger
   end
 
+
   def self.configuration
     @configuration ||= Configuration.new
   end

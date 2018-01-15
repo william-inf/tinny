@@ -1,3 +1,5 @@
+require 'tinny'
+
 module LoggerHelpers
 
   def log_debug(message)

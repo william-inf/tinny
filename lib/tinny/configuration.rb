@@ -2,13 +2,11 @@ require 'tinny/logger_helpers'
 
 module Tinny
   class Configuration
-    include LoggerHelpers
 
-    attr_accessor :baud_rate, :device_mount_point
+    attr_accessor :task_data
 
     def initialize
-      @baud_rate = 500
-      @device_mount_point = '/dev/ttyUSB0'
+      @task_data = nil
     end
   end
 end

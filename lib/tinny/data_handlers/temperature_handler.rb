@@ -12,7 +12,7 @@ module Tinny
       def handle_impl(data_array)
         data_array.each do |data|
           if data.start_with? 'Temperature'
-            p data
+            Tinny.logger.info data
           end
         end
       end
