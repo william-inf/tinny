@@ -36,5 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "serialport", "1.3.1"
   spec.add_development_dependency "celluloid", "0.17.3"
   spec.add_development_dependency "timers", "4.1.2"
+  spec.add_development_dependency "firehose", "0.1.0"
+  spec.add_development_dependency "influxdb", "0.5.2"
 
 end
