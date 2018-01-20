@@ -42,6 +42,11 @@ module Tinny
       close_impl
     end
 
+    def dispose
+      log_info 'Disposing of connection ...'
+      dispose_impl
+    end
+
     protected def stream_data_impl
       raise 'Not here!'
     end
@@ -53,5 +58,10 @@ module Tinny
     protected def close_impl
       raise 'Not here!'
     end
+
+    protected def dispose_impl
+      raise 'Not here!'
+    end
+
   end
 end

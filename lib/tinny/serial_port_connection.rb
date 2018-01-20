@@ -24,8 +24,8 @@ module Tinny
           @config[:data_bits],
           @config[:stop_bits],
           SerialPort::NONE
-
       )
+
       @timer.every(@config[:seconds_between_poll]) do
         value = @sp.readlines
         @sp.flush

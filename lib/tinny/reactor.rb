@@ -50,22 +50,3 @@ module Tinny
 
   end
 end
-
-# Example Code
-# serial_data = {
-#     connection: 'serial_port_connection',
-#     config: {
-#         mount_point: '/dev/ttyACM5',
-#         baud_rate: 9600,
-#         data_bits: 8,
-#         stop_bits: 1,
-#         data_handler: Tinny::DataHandler::TemperatureHandler.new,
-#         seconds_between_poll: 5
-#     }
-# }
-#
-# Tinny::Reactor.new.async.process(serial_data)
-#
-# loop do
-#   sleep 1
-# end
