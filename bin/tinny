@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'tinny'
+
+tinny = Tinny::Control.new
+tinny.start

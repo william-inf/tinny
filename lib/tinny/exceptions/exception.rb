@@ -5,5 +5,11 @@ module Tinny
         super(message)
       end
     end
+
+    class MissingConfigException < StandardError
+      def initialize(message = 'Missing/Invalid config block. See docs.')
+        super(message)
+      end
+    end
   end
 end

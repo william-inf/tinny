@@ -1,4 +1,5 @@
 require 'tinny/logger_helpers'
+require 'tinny/exceptions/exception'
 
 module Tinny
   class Connection
@@ -30,6 +31,21 @@ module Tinny
       raise 'Run configure first to set this up' unless configured?
       log_info 'Beginning data stream ...'
       stream_data_impl
+
+    rescue Exception => ex
+      whitelist = [MissingConfigException, SystemExit, NoMemoryError, SystemStackError, SignalException, ScriptError]
+
+      if whitelist.find { |c| ex.is_a?(c) }
+        log_error "Re-raising critical exception: #{ex.class}"
+        raise ex
+      end
+
+      handle_rescuable_exception
+    end
+
+    def handle_rescuable_exception
+      log_info 'Handling a rescuable exception'
+      handle_rescuable_ex_impl
     end
 
     def required_config
@@ -63,5 +79,8 @@ module Tinny
       raise 'Not here!'
     end
 
+    protected def handle_rescuable_ex_impl
+      raise 'Not here!'
+    end
   end
 end

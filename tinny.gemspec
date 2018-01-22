@@ -13,6 +13,7 @@ Gem::Specification.new do |spec|
   spec.description   = "A variety of helper utilities for CAN decoding."
   spec.homepage      = "http://wwww.williamthom.as"
   spec.license       = "MIT"
+  spec.executables   = ["tinny"]
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
