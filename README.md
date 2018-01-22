@@ -27,7 +27,7 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-serial_data = {
+serial_data = [{
     connection: 'serial_port_connection',
     config: {
         mount_point: '/dev/ttyACM5',
@@ -37,10 +37,12 @@ serial_data = {
         data_handler: Tinny::DataHandler::TemperatureHandler.new, # Example data handler
         seconds_between_poll: 5
     }
-}
+}, {
+    ...
+}]
 
-reactor = Tinny::Reactor.new
-reactor.async.process(serial_data)
+tinny = Tinny::Control.new(tasks_config)
+tinny.start
 ```
 
 

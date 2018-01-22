@@ -1,9 +1,11 @@
 require 'tinny'
 require 'tinny/data_handlers/temperature_handler'
 require 'tinny/reactor'
+require 'tinny/logger_helpers'
 
 module Tinny
   class Control
+    include LoggerHelpers
     def initialize(tasks_config)
       @tasks_config = tasks_config
     end
@@ -17,37 +19,9 @@ module Tinny
 
       # We need to keep this alive for the actors that are initialised
       loop do
+        log_debug 'We are running!'
         sleep 10
       end
     end
   end
 end
-
-tasks_config = [{
-    connection: 'serial_port_connection',
-    name: 'Temperature Sensor',
-    config: {
-        mount_point: '/dev/ttyACM8',
-        baud_rate: 9600,
-        data_bits: 8,
-        stop_bits: 1,
-        data_handler: Tinny::DataHandler::TemperatureHandler.new,
-        seconds_between_poll: 5
-    }
-},
-{
-    connection: 'serial_port_connection',
-    name: 'Temperature Sensor',
-    config: {
-        mount_point: '/dev/ttyACM1',
-        baud_rate: 9600,
-        data_bits: 8,
-        stop_bits: 1,
-        data_handler: Tinny::DataHandler::TemperatureHandler.new,
-        seconds_between_poll: 5
-    }
-}
-]
-
-tinny = Tinny::Control.new(tasks_config)
-tinny.start
