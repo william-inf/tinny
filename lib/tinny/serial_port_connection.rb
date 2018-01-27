@@ -13,7 +13,7 @@ module Tinny
 
     def stream_data_impl
       begin
-        data_handler = @config[:data_handler]
+        data_handler = create_data_handler
         if data_handler.nil? ||
             data_handler.class.superclass.name == Tinny::DataHandler::Handler
           raise Tinny::Exception::InvalidHandlerException.new
@@ -51,11 +51,10 @@ module Tinny
        :seconds_between_poll]
     end
 
-    def handle_rescuable_ex_impl
-      @sp = nil
-      log_error ex.message
-      sleep 10
-      stream_data_impl
+    def create_data_handler
+      config = @config.fetch(:data_handler)
+      data_handler_klazz = config[:class]
+      data_handler_klazz.new(config[:config])
     end
   end
 end

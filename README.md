@@ -27,7 +27,7 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-serial_data = [{
+tasks_config = [{
     connection: 'serial_port_connection',
     config: {
         mount_point: '/dev/ttyACM5',
