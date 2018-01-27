@@ -25,7 +25,18 @@ module Tinny::Calculators
 
     def is_valid?
       extract if @data_map.nil?
-      @data_map.fetch(:valid, false)
+      res = @data_map.fetch(:valid, 'V')
+      res == 'A'
+    end
+
+    def get_data_map
+      extract if @data_map.nil?
+      @data_map
+    end
+
+    def compute_haversine(starting_coords)
+      return nil unless is_valid?
+      Tinny::Calculators::DistanceUtils.haversine(starting_coords, lat_long_digital_degrees)
     end
 
     private def extract
@@ -33,7 +44,7 @@ module Tinny::Calculators
       @data_map = {
           identifier: data[0],
           gmt_time: data[1],
-          valid: data[2] == 'A' ? true : false,
+          valid: data[2],
           lat: data[3].to_f,
           lat_dir: data[4],
           lon: data[5].to_f,
@@ -45,9 +56,3 @@ module Tinny::Calculators
     end
   end
 end
-
-# str = '$GPRMC,055441.000,A,3519.039624,S,14908.575991,E,0.27,192.89,270118,,,A*77'
-# p Tinny::Calculators::GPRMCData.new(str, settings: true, abc: true).lat_long_ddmmmm
-#
-# [-35.28878382848341, 149.19249394121096]
-# [-35.26797352499248, 149.1963563221924]
